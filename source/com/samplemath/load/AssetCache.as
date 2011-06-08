@@ -109,7 +109,7 @@ package com.samplemath.load {
 				cacheArray[assetToUncache] = null;
 				System.gc();
 				if (stage) {
-					stage.addEventListener(Event.ENTER_FRAME, handleControlCacheSize)
+					stage.addEventListener(Event.ENTER_FRAME, handleControlCacheSize, false, 0, true)
 				}
 			} else {
 				if (stage) {

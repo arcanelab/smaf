@@ -68,9 +68,9 @@ package com.samplemath.application {
 		private function loadApplication():void {
 			applicationLoader = new Loader();
 			addChild(applicationLoader);
-			applicationLoader.contentLoaderInfo.addEventListener(Event.INIT, handleApplicationLoaded);
-			applicationLoader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, handleApplicationLoading);
- 			applicationLoader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, handleLoadError);
+			applicationLoader.contentLoaderInfo.addEventListener(Event.INIT, handleApplicationLoaded, false, 0, true);
+			applicationLoader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, handleApplicationLoading, false, 0, true);
+ 			applicationLoader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, handleLoadError, false, 0, true);
    			
 			var context:LoaderContext = new LoaderContext();
 			context.applicationDomain = ApplicationDomain.currentDomain;                       

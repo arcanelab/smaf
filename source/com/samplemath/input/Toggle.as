@@ -133,7 +133,7 @@ package com.samplemath.input {
 			offComposition.setChildren(new XML(CDATA_PREFIX + _itemData.text() + CDATA_SUFFIX));
 			buttonOff.itemData = offComposition;
 			buttonOff.setDimensions(_itemWidth, _itemHeight);
-			buttonOff.addEventListener(MouseEvent.MOUSE_DOWN, handleToggle);
+			buttonOff.addEventListener(MouseEvent.MOUSE_DOWN, handleToggle, false, 0, true);
 
 			if (!buttonOn)
 			{
@@ -153,7 +153,7 @@ package com.samplemath.input {
 			buttonOn.itemData = onComposition;
 			buttonOn.setDimensions(_itemWidth, _itemHeight);
 			buttonOn.visible = false;
-			buttonOn.addEventListener(MouseEvent.MOUSE_DOWN, handleToggle);
+			buttonOn.addEventListener(MouseEvent.MOUSE_DOWN, handleToggle, false, 0, true);
 		}   
 		
 /**

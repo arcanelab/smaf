@@ -310,7 +310,7 @@ package com.samplemath.composition {
 			if (_itemData.@completelistener.length()) {
 				if (Registry.get(_itemData.@completelistener)) {
 					if (Registry.get(_itemData.@completelistener).hasOwnProperty(_itemData.@completeaction)) {
-						addEventListener(Event.COMPLETE, Registry.get(_itemData.@completelistener)[_itemData.@completeaction] as Function);
+						addEventListener(Event.COMPLETE, Registry.get(_itemData.@completelistener)[_itemData.@completeaction] as Function, false, 0, true);
 					}
 				}
 			}			

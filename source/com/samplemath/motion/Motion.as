@@ -123,7 +123,7 @@ package com.samplemath.motion {
 			_moving = true;   
 			motionDate = new Date();
 			motionStamp = motionDate.time;
-			engine.addEventListener(Event.ENTER_FRAME, handleMotion);
+			engine.addEventListener(Event.ENTER_FRAME, handleMotion, false, 0, true);
 			dispatchValue(0);
 		}   
 

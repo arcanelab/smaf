@@ -31,7 +31,7 @@ package com.samplemath.application {
 /**
 *	Abstract template for the application document class. 
 *
-*	<p>AApplication is to provide a template application document class to extend for creating your own application document class. The application document class.</p>
+*	<p>AApplication is to provide a template application document class to extend for creating your own application document class.</p>
 */
  	public class AApplication extends MovieClip {
 				
@@ -66,7 +66,7 @@ package com.samplemath.application {
 */		
 		protected function authenticateSession():void {
 			User.authenticateSession(Configuration.data.serviceBaseURL.text() + Configuration.data.serviceURI.user.authenticate.text(), Configuration.data.sharedObjectDomain.text());
-			addEventListener(SMAFEvent.SESSION_AUTHENTICATION, handleSessionAuthentication);
+			addEventListener(SMAFEvent.SESSION_AUTHENTICATION, handleSessionAuthentication, false, 0, true);
 		}         
 		
 /**
@@ -133,7 +133,7 @@ package com.samplemath.application {
 			if (_flashvars[CONFIGURATION_PATH])
 			{
 				Configuration.loadConfigurationData(_flashvars[CONFIGURATION_PATH]);
-				addEventListener(SMAFEvent.CONFIGURATION_AVAILABLE, handleConfigurationLoaded);
+				addEventListener(SMAFEvent.CONFIGURATION_AVAILABLE, handleConfigurationLoaded, false, 0, true);
 			} else {
 				Utility.javascriptAlert(CONFIGURATION_NOT_AVAILABLE_ALERT);
 			}
@@ -150,12 +150,12 @@ package com.samplemath.application {
 			
 			Registry.set(this, APPLICATION);
 
-			stage.addEventListener(Event.RESIZE, handleStageResize);
+			stage.addEventListener(Event.RESIZE, handleStageResize, false, 0, true);
 			AssetCache.stage = stage;
 			FontManager.stage = stage;
 			KeyBind.stage = stage;
 
-			stage.addEventListener(Event.RESIZE, handleStageResize);
+			stage.addEventListener(Event.RESIZE, handleStageResize, false, 0, true);
 			stage.stageFocusRect = false;
 			Registry.set(stage, STAGE);
 

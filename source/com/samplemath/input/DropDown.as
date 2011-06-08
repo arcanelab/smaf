@@ -338,7 +338,7 @@ package com.samplemath.input {
 			}            
 			listboxComposition.@height = trayHeight;
 			listBox.itemData = listboxComposition;   
-			listBox.addEventListener(Event.CHANGE, handleChange);
+			listBox.addEventListener(Event.CHANGE, handleChange, false, 0, true);
 
 			if (!button)
 			{
@@ -359,7 +359,7 @@ package com.samplemath.input {
 			buttonComposition.@interactive = 1;
 			button.itemData = buttonComposition;
 			button.setDimensions(_itemWidth, _itemHeight);
-			button.addEventListener(MouseEvent.MOUSE_DOWN, handleDropDown);
+			button.addEventListener(MouseEvent.MOUSE_DOWN, handleDropDown, false, 0, true);
 		}   
 		
 		private function renderDropDownItems():void
@@ -438,7 +438,7 @@ package com.samplemath.input {
 					renderDropDownItems();
 				}
 			} else {
-				addEventListener(Event.ENTER_FRAME, waitToRenderDropDownItems);
+				addEventListener(Event.ENTER_FRAME, waitToRenderDropDownItems, false, 0, true);
 			}
 		}
 

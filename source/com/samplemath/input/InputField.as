@@ -302,7 +302,7 @@ package com.samplemath.input {
 			if (_itemData.@changelistener.length()) {
 				if (Registry.get(_itemData.@changelistener.toString())) {
 					if (Registry.get(_itemData.@changelistener.toString()).hasOwnProperty(_itemData.@changeaction.toString())) {
-						addEventListener(Event.CHANGE, Registry.get(_itemData.@changelistener.toString())[_itemData.@changeaction.toString()] as Function);
+						addEventListener(Event.CHANGE, Registry.get(_itemData.@changelistener.toString())[_itemData.@changeaction.toString()] as Function, false, 0, true);
 					}
 				}
 			}						
@@ -363,11 +363,11 @@ package com.samplemath.input {
 			if (inputText.textField)
 			{
 				inputText.textField.type = TextFieldType.INPUT;
-				inputText.textField.addEventListener(Event.CHANGE, handleChange);
-				inputText.textField.addEventListener(TextEvent.TEXT_INPUT, handleInput);
-				inputText.textField.addEventListener(FocusEvent.FOCUS_IN, handleFocus);
-				inputText.textField.addEventListener(FocusEvent.FOCUS_OUT, handleFocusOut);
-				inputText.textField.addEventListener(KeyboardEvent.KEY_DOWN, handleInputKeyDown);
+				inputText.textField.addEventListener(Event.CHANGE, handleChange, false, 0, true);
+				inputText.textField.addEventListener(TextEvent.TEXT_INPUT, handleInput, false, 0, true);
+				inputText.textField.addEventListener(FocusEvent.FOCUS_IN, handleFocus, false, 0, true);
+				inputText.textField.addEventListener(FocusEvent.FOCUS_OUT, handleFocusOut, false, 0, true);
+				inputText.textField.addEventListener(KeyboardEvent.KEY_DOWN, handleInputKeyDown, false, 0, true);
 				inputText.textField.tabEnabled = true;
 				if (_itemData.@tabindex.length()) {
 					inputText.textField.tabIndex = int(_itemData.@tabindex.toString());

@@ -305,10 +305,10 @@ package com.samplemath.load {
 				}
 				assetLoading = new Loader();
 				assetLoading.cacheAsBitmap = cacheAsBitmap;
-				assetLoading.contentLoaderInfo.addEventListener(Event.INIT, handleAssetLoaded);
-				assetLoading.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, handleAssetLoadError);
+				assetLoading.contentLoaderInfo.addEventListener(Event.INIT, handleAssetLoaded, false, 0, true);
+				assetLoading.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, handleAssetLoadError, false, 0, true);
 				if (_itemData.@progressListener.length()) {
-					assetLoading.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, handleAssetLoading);
+					assetLoading.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, handleAssetLoading, false, 0, true);
 				}                                                   
 				var checkPolicyFile:Boolean = false;
 				if (_itemData.@checkpolicyfile.length())
@@ -421,7 +421,7 @@ package com.samplemath.load {
 			} else {
 				assetLoader = new Loader();
 				assetLoader.cacheAsBitmap = cacheAsBitmap;
-				assetLoader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, handleAssetLoadError);
+				assetLoader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, handleAssetLoadError, false, 0, true);
 			}
 			addChild(assetLoader);	   
 			 	
@@ -430,7 +430,7 @@ package com.samplemath.load {
 			adjustAsset();
 
 			if (_itemData.@completelistener.length()) {
-				addEventListener(Event.ENTER_FRAME, handleCompleteEvent);
+				addEventListener(Event.ENTER_FRAME, handleCompleteEvent, false, 0, true);
 			}	
 		}
 		

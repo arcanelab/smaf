@@ -25,8 +25,8 @@ package com.samplemath.composition {
 /**
 *	The key element in recursive UI composition. 
 *	<p>The root element of every composition is a Composer. It is an interactive display object container capable
-*	of containing a number of UI elements according to the markup in <code>itemData</code>. Containers can be
-*	contained within Containers creating a powerful recursive composition model.</p>
+*	of containing a number of UI elements according to the <code>itemData</code> markup. Containers can be
+*	contained within Containers resulting in a powerful recursive composition model.</p>
 *	
 *	@see com.samplemath.composition.AComposable
 *	@see com.samplemath.interaction.AInteractive
@@ -202,7 +202,7 @@ package com.samplemath.composition {
 				{        
 					if (stage)
 					{
-						stage.addEventListener(Event.ENTER_FRAME, handleWaitForContentHeight);
+						stage.addEventListener(Event.ENTER_FRAME, handleWaitForContentHeight, false, 0, true);
 					}
 				} else {
 					adjustScrollBehavior();
@@ -342,7 +342,7 @@ package com.samplemath.composition {
 					adjustScroll(); 
 					Composition.applyFilters(AComposable(this));		
 					if (stage) {
-						stage.addEventListener(Event.ENTER_FRAME, handleCompleteTimeout);
+						stage.addEventListener(Event.ENTER_FRAME, handleCompleteTimeout, false, 0, true);
 					} else {
 						handleComplete();
 					}
@@ -421,7 +421,7 @@ package com.samplemath.composition {
 				_itemData.@urlLoaded = _itemData.@url.toString();
 				_itemData.@url = null; 
 				var contentData:Data = new Data(_itemData.@urlLoaded.toString());									
-				contentData.loader.addEventListener(Event.COMPLETE, handleContentDataLoaded);
+				contentData.loader.addEventListener(Event.COMPLETE, handleContentDataLoaded, false, 0, true);
 			}
 		}   
 		

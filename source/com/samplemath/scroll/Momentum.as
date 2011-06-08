@@ -147,7 +147,7 @@ package com.samplemath.scroll {
 				}
 				if ((_scrollPosition < (previousScrollPosition + Momentum.TRESHOLD)) && (_scrollPosition > (previousScrollPosition - Momentum.TRESHOLD)) && (Math.abs(appliedVector / scrollSize) < Momentum.TRESHOLD)) {
 					_mouseOriginIndicator.visible = false;
-					_composer.addEventListener(MouseEvent.MOUSE_MOVE, handleRestartScroll);
+					_composer.addEventListener(MouseEvent.MOUSE_MOVE, handleRestartScroll, false, 0, true);
 				} else {
 					_composer.scrollTo(_scrollPosition);
 					previousScrollPosition = _scrollPosition;
@@ -221,11 +221,11 @@ package com.samplemath.scroll {
 //			_scrollIndicatorBox.fill = StyleSheet.getScrollIndicator(_scrollStyle);
 			addChild(AComposable(_scrollIndicatorBox));
 			Composition.applyProperties(AComposable(_scrollIndicatorBox));		
-			_composer.addEventListener(MouseEvent.ROLL_OVER, handleRollOver);
-			_composer.addEventListener(MouseEvent.ROLL_OUT, handleRollOut);
+			_composer.addEventListener(MouseEvent.ROLL_OVER, handleRollOver, false, 0, true);
+			_composer.addEventListener(MouseEvent.ROLL_OUT, handleRollOut, false, 0, true);
 			if (_clickPause) {
-				_composer.addEventListener(MouseEvent.MOUSE_DOWN, handleMouseDown);
-				_composer.addEventListener(MouseEvent.MOUSE_UP, handleMouseUp);
+				_composer.addEventListener(MouseEvent.MOUSE_DOWN, handleMouseDown, false, 0, true);
+				_composer.addEventListener(MouseEvent.MOUSE_UP, handleMouseUp, false, 0, true);
 			}
 			_scrollIndicatorBox.visible = false;
 		}
@@ -289,7 +289,7 @@ package com.samplemath.scroll {
 					_scrollIndicatorBox.x = int(_composer._width - indicatorSize);
 				}                               
 
-				root.addEventListener(Event.ENTER_FRAME, handleScroll);
+				root.addEventListener(Event.ENTER_FRAME, handleScroll, false, 0, true);
 			}
 		}
 

@@ -95,28 +95,28 @@ package com.samplemath.interaction {
 				if (_itemData.@mouselistener.length()) {
 					if (Registry.get(_itemData.@mouselistener.toString())) {
 						if (_itemData.@onmouseover.length()) {
-							addEventListener(MouseEvent.MOUSE_OVER, Registry.get(_itemData.@mouselistener.toString())[_itemData.@onmouseover.toString()] as Function);
+							addEventListener(MouseEvent.MOUSE_OVER, Registry.get(_itemData.@mouselistener.toString())[_itemData.@onmouseover.toString()] as Function, false, 0, true);
 						}
 						if (_itemData.@onmouseout.length()) {
-							addEventListener(MouseEvent.MOUSE_OUT, Registry.get(_itemData.@mouselistener.toString())[_itemData.@onmouseout.toString()] as Function);
+							addEventListener(MouseEvent.MOUSE_OUT, Registry.get(_itemData.@mouselistener.toString())[_itemData.@onmouseout.toString()] as Function, false, 0, true);
 						}
 						if (_itemData.@onmousedown.length()) {
-							addEventListener(MouseEvent.MOUSE_DOWN, Registry.get(_itemData.@mouselistener.toString())[_itemData.@onmousedown.toString()] as Function);
+							addEventListener(MouseEvent.MOUSE_DOWN, Registry.get(_itemData.@mouselistener.toString())[_itemData.@onmousedown.toString()] as Function, false, 0, true);
 						}
 						if (_itemData.@onmouseup.length()) {
-							addEventListener(MouseEvent.MOUSE_UP, Registry.get(_itemData.@mouselistener.toString())[_itemData.@onmouseup.toString()] as Function);
+							addEventListener(MouseEvent.MOUSE_UP, Registry.get(_itemData.@mouselistener.toString())[_itemData.@onmouseup.toString()] as Function, false, 0, true);
 						}
 						if (_itemData.@onrollover.length()) {
-							addEventListener(MouseEvent.ROLL_OVER, Registry.get(_itemData.@mouselistener.toString())[_itemData.@onrollover.toString()] as Function);
+							addEventListener(MouseEvent.ROLL_OVER, Registry.get(_itemData.@mouselistener.toString())[_itemData.@onrollover.toString()] as Function, false, 0, true);
 						}
 						if (_itemData.@onrollout.length()) {
-							addEventListener(MouseEvent.ROLL_OUT, Registry.get(_itemData.@mouselistener.toString())[_itemData.@onrollout.toString()] as Function);
+							addEventListener(MouseEvent.ROLL_OUT, Registry.get(_itemData.@mouselistener.toString())[_itemData.@onrollout.toString()] as Function, false, 0, true);
 						}
 						if (_itemData.@onclick.length()) {
-							addEventListener(MouseEvent.CLICK, Registry.get(_itemData.@mouselistener.toString())[_itemData.@onclick.toString()] as Function);
+							addEventListener(MouseEvent.CLICK, Registry.get(_itemData.@mouselistener.toString())[_itemData.@onclick.toString()] as Function, false, 0, true);
 						}
 						if (_itemData.@onmousemove.length()) {
-							addEventListener(MouseEvent.MOUSE_MOVE, Registry.get(_itemData.@mouselistener.toString())[_itemData.@onmousemove.toString()] as Function);
+							addEventListener(MouseEvent.MOUSE_MOVE, Registry.get(_itemData.@mouselistener.toString())[_itemData.@onmousemove.toString()] as Function, false, 0, true);
 						}
 					}
 				}						
@@ -124,17 +124,17 @@ package com.samplemath.interaction {
 			if (_itemData.@keylistener.length()) {
 				if (Registry.get(_itemData.@keylistener.toString())) {
 					if (_itemData.@onkeydown.length()) {
-						addEventListener(KeyboardEvent.KEY_DOWN, Registry.get(_itemData.@keylistener.toString())[_itemData.@onkeydown.toString()] as Function);
+						addEventListener(KeyboardEvent.KEY_DOWN, Registry.get(_itemData.@keylistener.toString())[_itemData.@onkeydown.toString()] as Function, false, 0, true);
 					}
 					if (_itemData.@onkeyup.length()) {
-						addEventListener(KeyboardEvent.KEY_UP, Registry.get(_itemData.@keylistener.toString())[_itemData.@onkeydown.toString()] as Function);
+						addEventListener(KeyboardEvent.KEY_UP, Registry.get(_itemData.@keylistener.toString())[_itemData.@onkeydown.toString()] as Function, false, 0, true);
 					}
 				}
 			}
 			if (_itemData.@keycode.length()) {     
 				KeyBind.resume();
 				KeyBind.register(_itemData.@keycode.toString(), _itemData.@id.toString());
-				addEventListener(Event.REMOVED_FROM_STAGE, handleRemovedFromStage);         
+				addEventListener(Event.REMOVED_FROM_STAGE, handleRemovedFromStage, false, 0, true);         
 			}
 		}
 		

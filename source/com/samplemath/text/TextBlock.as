@@ -126,7 +126,7 @@ package com.samplemath.text {
 					{
 						if (Registry.get(APPLICATION))
 						{
-							Registry.get(APPLICATION).stage.addEventListener(SMAFEvent.FONT_AVAILABLE, handleFontAvailable, false, 0, true)
+							Registry.get(APPLICATION).stage.addEventListener(SMAFEvent.FONT_AVAILABLE, handleFontAvailable, false, 0, true);
 						}
 					}
 					if ((FontManager.fontIsRequested(StyleSheet.getTextformatFont(textformatStyle)) != true))
