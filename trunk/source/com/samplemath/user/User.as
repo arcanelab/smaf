@@ -69,7 +69,7 @@ package com.samplemath.user {
 
 			var requestData:URLVariables = new URLVariables(); 
 			var sessionData:Data = new Data(path, requestData, true);
-			sessionData.loader.addEventListener(Event.COMPLETE, User.handleSessionAuthentication);
+			sessionData.loader.addEventListener(Event.COMPLETE, User.handleSessionAuthentication, false, 0, true);
 		}
 		
 		public static function changePassword(changePasswordURL:String, oldPassword:String, newPassword:String):void {
@@ -78,7 +78,7 @@ package com.samplemath.user {
 			requestData.newPassword = newPassword;
 			requestData.pass = _pass;
 			var reminderData:Data = new Data(changePasswordURL, requestData);
-			reminderData.loader.addEventListener(Event.COMPLETE, User.handlePasswordChanged);
+			reminderData.loader.addEventListener(Event.COMPLETE, User.handlePasswordChanged, false, 0, true);
 		}
 
 		public static function handleAccountVariableSet(event:Event):void {
@@ -177,14 +177,14 @@ package com.samplemath.user {
 			requestData.username = username;
 			requestData.password = password;
 			var loginData:Data = new Data(loginPath, requestData);
-			loginData.loader.addEventListener(Event.COMPLETE, User.handleLoginResponse);
+			loginData.loader.addEventListener(Event.COMPLETE, User.handleLoginResponse, false, 0, true);
 		}
 
 		public static function logout(logoutPath:String):void {
 			var requestData:URLVariables = new URLVariables(); 
 			requestData.pass = _pass;
 			var logoutData:Data = new Data(logoutPath, requestData, true);
-			logoutData.loader.addEventListener(Event.COMPLETE, User.handleLogoutResponse);
+			logoutData.loader.addEventListener(Event.COMPLETE, User.handleLogoutResponse, false, 0, true);
 		}            		
 		
 		public static function get pass():String {
@@ -202,21 +202,21 @@ package com.samplemath.user {
 			requestData.email = email;
 			requestData.password = password;
 			var reminderData:Data = new Data(registgerURL, requestData);
-			reminderData.loader.addEventListener(Event.COMPLETE, User.handleRegisterResponse);
+			reminderData.loader.addEventListener(Event.COMPLETE, User.handleRegisterResponse, false, 0, true);
 		}
 
 		public static function resend(resendURL:String, username:String):void {
 			var requestData:URLVariables = new URLVariables(); 
 			requestData.username = username;
 			var reminderData:Data = new Data(resendURL, requestData);
-			reminderData.loader.addEventListener(Event.COMPLETE, User.handleResendResponse);
+			reminderData.loader.addEventListener(Event.COMPLETE, User.handleResendResponse, false, 0, true);
 		}
 
 		public static function resetPassword(resetPasswordURL:String, reminder:String):void {
 			var requestData:URLVariables = new URLVariables(); 
 			requestData.reminder = reminder;
 			var reminderData:Data = new Data(resetPasswordURL, requestData);
-			reminderData.loader.addEventListener(Event.COMPLETE, User.handleResetPasswordResponse);
+			reminderData.loader.addEventListener(Event.COMPLETE, User.handleResetPasswordResponse, false, 0, true);
 		}
 
 		public static function setAccountVariable(setAccountVariableURL:String, variable:String, value:String):void {
@@ -225,7 +225,7 @@ package com.samplemath.user {
 			requestData.value = value;
 			requestData.pass = _pass;
 			var reminderData:Data = new Data(setAccountVariableURL, requestData);
-			reminderData.loader.addEventListener(Event.COMPLETE, User.handleAccountVariableSet);
+			reminderData.loader.addEventListener(Event.COMPLETE, User.handleAccountVariableSet, false, 0, true);
 		}
 
 		public static function get username():String {
@@ -237,7 +237,7 @@ package com.samplemath.user {
 			requestData.username = username;
 			requestData.email = email;
 			var reminderData:Data = new Data(verifyURL, requestData);
-			reminderData.loader.addEventListener(Event.COMPLETE, User.handleVerifyRegistrationResponse);
+			reminderData.loader.addEventListener(Event.COMPLETE, User.handleVerifyRegistrationResponse, false, 0, true);
 		}
 	}
 }

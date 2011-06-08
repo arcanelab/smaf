@@ -158,8 +158,8 @@ package com.samplemath.interaction {
 			keyboardListenerRegistered = true;
 			if (_stage)
 			{
-				_stage.addEventListener(KeyboardEvent.KEY_DOWN, handleKeyDown);
-				_stage.addEventListener(KeyboardEvent.KEY_UP, handleKeyUp);
+				_stage.addEventListener(KeyboardEvent.KEY_DOWN, handleKeyDown, false, 0, true);
+				_stage.addEventListener(KeyboardEvent.KEY_UP, handleKeyUp, false, 0, true);
 			}
 		}
 		

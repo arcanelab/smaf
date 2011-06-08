@@ -188,7 +188,7 @@ package com.samplemath.utility {
 			addChild(composer); 
 			stage.align = StageAlign.TOP_LEFT;
 			composer.itemData = _smxml;
-			stage.addEventListener(Event.RESIZE, handleStageResize);
+			stage.addEventListener(Event.RESIZE, handleStageResize, false, 0, true);
 			handleStageResize(null);
 		}                 
 		

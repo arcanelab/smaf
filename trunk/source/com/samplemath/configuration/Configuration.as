@@ -94,12 +94,12 @@ package com.samplemath.configuration {
 		public static function loadConfigurationData(path:String):void {     
 			Registry.set(Configuration, CONFIGURATION);
 			var configurationData:Data = new Data(path);
-			configurationData.loader.addEventListener(Event.COMPLETE, Configuration.handleConfigurationLoaded);
+			configurationData.loader.addEventListener(Event.COMPLETE, Configuration.handleConfigurationLoaded, false, 0, true);
 		}   
 		
 		private static function loadInclude(includeData:XML):void {  
 			var includeToLoadData:Data = new Data(includeData.@url.toString());
-			includeToLoadData.loader.addEventListener(Event.COMPLETE, Configuration.handleIncludeLoaded);
+			includeToLoadData.loader.addEventListener(Event.COMPLETE, Configuration.handleIncludeLoaded, false, 0, true);
 		}
 		
 		private static function loadIncludes():void {

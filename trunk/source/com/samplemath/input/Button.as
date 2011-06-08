@@ -153,8 +153,8 @@ package com.samplemath.input {
 */
 		override protected function registerEvents():void {
 			super.registerEvents();
-			addEventListener(MouseEvent.MOUSE_OVER, handleMouseOver);
-			addEventListener(MouseEvent.MOUSE_OUT, handleMouseOut);
+			addEventListener(MouseEvent.MOUSE_OVER, handleMouseOver, false, 0, true);
+			addEventListener(MouseEvent.MOUSE_OUT, handleMouseOut, false, 0, true);
 		}
 
 /**

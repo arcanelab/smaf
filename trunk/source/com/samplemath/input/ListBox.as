@@ -407,7 +407,7 @@ package com.samplemath.input {
 			if (_itemData.@changelistener.length()) {
 				if (Registry.get(_itemData.@changelistener.toString())) {
 					if (Registry.get(_itemData.@changelistener.toString()).hasOwnProperty(_itemData.@changeaction.toString())) {
-						addEventListener(Event.CHANGE, Registry.get(_itemData.@changelistener.toString())[_itemData.@changeaction.toString()] as Function);
+						addEventListener(Event.CHANGE, Registry.get(_itemData.@changelistener.toString())[_itemData.@changeaction.toString()] as Function, false, 0, true);
 					}
 				}
 			}						
@@ -704,7 +704,7 @@ package com.samplemath.input {
 					renderListBoxItems();
 				}
 			} else {
-				addEventListener(Event.ENTER_FRAME, waitToRenderListBoxItems);
+				addEventListener(Event.ENTER_FRAME, waitToRenderListBoxItems, false, 0, true);
 			}
 		}
 	}

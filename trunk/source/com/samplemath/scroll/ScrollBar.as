@@ -147,7 +147,7 @@ package com.samplemath.scroll {
 		}
 		
 		private function handleBackgroundMouseDown(p_mouseEvent:MouseEvent):void {
-			addEventListener(Event.ENTER_FRAME, handleAttractThumb);
+			addEventListener(Event.ENTER_FRAME, handleAttractThumb, false, 0, true);
 			stage.addEventListener(MouseEvent.MOUSE_UP, handleBackgroundMouseUp, false, 0, true);
 		}
 		
@@ -272,8 +272,8 @@ package com.samplemath.scroll {
 				startScroll();
 			}
 			
-			_composer.addEventListener(MouseEvent.ROLL_OVER, handleRollOver);
-			_composer.addEventListener(MouseEvent.ROLL_OUT, handleRollOut);
+			_composer.addEventListener(MouseEvent.ROLL_OVER, handleRollOver, false, 0, true);
+			_composer.addEventListener(MouseEvent.ROLL_OUT, handleRollOut, false, 0, true);
 			
 
 			_scrollBarBackground.addEventListener(MouseEvent.MOUSE_DOWN, handleBackgroundMouseDown, false, 0, true);

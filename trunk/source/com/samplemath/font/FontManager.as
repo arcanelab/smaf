@@ -154,21 +154,21 @@ package com.samplemath.font {
 			var requestData:URLVariables = new URLVariables(); 
 			requestData.parameters = _parameters;
 			var fontListData:Data = new Data(_fontListURL, requestData);
-			fontListData.loader.addEventListener(Event.COMPLETE, FontManager.handleFontListLoaded);
+			fontListData.loader.addEventListener(Event.COMPLETE, FontManager.handleFontListLoaded, false, 0, true);
 		}
 		
 		private static function loadFontListRequested():void {
 			var requestData:URLVariables = new URLVariables(); 
 			requestData.parameters = _parameters;
 			var fontListData:Data = new Data(_fontListURL, requestData);
-			fontListData.loader.addEventListener(Event.COMPLETE, FontManager.handleFontListRequestedLoaded);
+			fontListData.loader.addEventListener(Event.COMPLETE, FontManager.handleFontListRequestedLoaded, false, 0, true);
 		}
 		
 		private static function loadNextFontInList():void {
 			if (fontListToLoad.font.length()) {
 				var thisFontPack:FontLoader = new FontLoader(); 
-				thisFontPack.addEventListener(Event.COMPLETE, handleFontLoadedFromList);
-				thisFontPack.addEventListener(IOErrorEvent.IO_ERROR, handleLoadError);
+				thisFontPack.addEventListener(Event.COMPLETE, handleFontLoadedFromList, false, 0, true);
+				thisFontPack.addEventListener(IOErrorEvent.IO_ERROR, handleLoadError, false, 0, true);
 				thisFontPack.load(new URLRequest(ServiceProxy.baseURL + fontListToLoad.font[0].@url.toString()));
 				registerFontAvailable(fontListToLoad.font[0].@id.toString(), fontListToLoad.font[0].text(), fontListToLoad.font[0].@url.toString());
 				if (!fontData)
@@ -179,7 +179,7 @@ package com.samplemath.font {
 				delete fontListToLoad.font[0];
 			} else {
 				_waitForFontsCounter = 5;
-				_stage.addEventListener(Event.ENTER_FRAME, handleWaitForFonts);
+				_stage.addEventListener(Event.ENTER_FRAME, handleWaitForFonts, false, 0, true);
 			}
 		}
 		
@@ -199,8 +199,8 @@ package com.samplemath.font {
 		
 		private static function loadFontPackage():void {
 			var thisFontPack:FontLoader = new FontLoader();
-			thisFontPack.addEventListener(IOErrorEvent.IO_ERROR, handleLoadError);
-			thisFontPack.addEventListener(Event.COMPLETE, handleFontPackLoaded);
+			thisFontPack.addEventListener(IOErrorEvent.IO_ERROR, handleLoadError, false, 0, true);
+			thisFontPack.addEventListener(Event.COMPLETE, handleFontPackLoaded, false, 0, true);
 			thisFontPack.load(new URLRequest(ServiceProxy.baseURL + _fontURL));
 		}
 		

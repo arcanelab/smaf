@@ -59,8 +59,8 @@ package com.samplemath.load {
 			} else {
 				data.loader.dataFormat = URLLoaderDataFormat.TEXT;
 			}
-			data.loader.addEventListener(IOErrorEvent.IO_ERROR, handleIOError);
-		    data.loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, handleSecurityError);
+			data.loader.addEventListener(IOErrorEvent.IO_ERROR, handleIOError, false, 0, true);
+		    data.loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, handleSecurityError, false, 0, true);
 			var request:URLRequest = new URLRequest((data.bypassBaseURL ? EMPTY_STRING : baseURL) + data.path + RND + int(Math.random() * 99999999999));
 			if (data.dataToSend) {
 				if (ServiceProxy.pass != "" && data.authenticated) {
