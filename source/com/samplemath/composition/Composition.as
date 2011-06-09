@@ -56,7 +56,7 @@ package com.samplemath.composition {
 			}                               
 			var patternNode:XML = <pattern/>;
 			patternNode.@id = patternID;
-			patternNode.setChildren(new XML(pattern));
+			patternNode.setChildren(new XML(CDATA_PREFIX + pattern + CDATA_SUFFIX));
 			itemData.replace[0].appendChild(patternNode);
 		}
 
