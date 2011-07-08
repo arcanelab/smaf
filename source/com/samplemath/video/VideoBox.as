@@ -21,8 +21,9 @@ package com.samplemath.video {
 */
 	public class VideoBox extends AComposable {
 		
+		private var _itemHeight:Number = 2;
+		private var _itemWidth:Number = 2;
 		private var _video:Video;
-		private var _videoBackground:Box;
 
 
 
@@ -54,47 +55,46 @@ package com.samplemath.video {
 *		@private
 */
 		override public function set _height(value:Number):void {  
-			if (_videoBackground) {
-				_videoBackground.height = value;
-			}                       
-			if (_video) {
-				_video.height = value;
-			}
+			_itemHeight = value;
+			renderVideo();
 		}
 		
 /**
 *		@inheritDoc
 */
-		override protected function render():void {
+		override protected function render():void {                 
+			super.render();                             
+			renderVideo();
+		}   
+		
+		private function renderVideo():void
+		{
  			if (!_video) {
 				_video = new Video(); 
 				_video.smoothing = true;
 				addChild(_video);                           
 				this.mouseEnabled = false;
 				this.buttonMode = false;
-/*				registerEventListeners();*/
-			}
-			
+			}   
+			_video.width = _itemWidth;
+			_video.height = _itemHeight;
 		}
 
 /**
 *		@private
 */
 		override public function _setDimensions(widthToSet:Number, heightToSet:Number):void { 
-			_width = widthToSet;
-			_height = heightToSet;
+			_itemWidth = widthToSet;
+			_itemHeight = heightToSet;
+			renderVideo();
 		}
 		
 /**
 *		@private
 */
 		override public function set _width(value:Number):void {	
- 			if (_videoBackground) {
-				_videoBackground.width = value;
-			}                       
-			if (_video) {
-				_video.width = value;
-			}                       
+			_itemWidth = value;
+			renderVideo();
    		}   
 
 /**
