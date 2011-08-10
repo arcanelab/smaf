@@ -78,6 +78,7 @@ package com.samplemath.input {
 			} else {
 				on = true;
 			}     
+			_itemData.@value = on;
 			buttonOn.visible = on;
 			buttonOff.visible = !on;
 		}
@@ -284,9 +285,8 @@ package com.samplemath.input {
 *		The <code>Toggle</code>'s label.
 */
 		public function set value(value:Boolean):void {  
-			on = value;
-			_itemData.@value = value;
-			renderToggle();
+			on = !value;
+			handleToggle(null);
 		}
 
 /**
