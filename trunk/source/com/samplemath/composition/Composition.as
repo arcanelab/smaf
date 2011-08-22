@@ -224,6 +224,10 @@ package com.samplemath.composition {
 							templateNodeString = templateNodeString.split(PATTERN_DELIMITER + pattern.@id.toString() + PATTERN_DELIMITER).join(value);
 						}           
 						templateNode = new XML(templateNodeString);
+						while (contentItem.itemData.replace.length())
+						{
+							delete contentItem.itemData.replace[0];
+						}
 					}
 					delete templateNode.@template;
 					if (templateNode.hasComplexContent())

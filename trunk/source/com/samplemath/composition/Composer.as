@@ -51,6 +51,7 @@ package com.samplemath.composition {
 		private const EMPTY_STRING:String = "";               
 		private const FIT:String = "fit";       
 		private const HORIZONTAL:String = "horizontal";       
+		private const REPLACE:String = "replace";
 		private const STRETCH:String = "stretch";       
 		private const STYLE:String = "style";       
 		private const TEMPLATE:String = "template";       
@@ -458,7 +459,9 @@ package com.samplemath.composition {
 						childComponentsReady++;
 						Composition.processTemplateNode(contentItemData);
 					} else {
-						renderChildComponent(contentItemDataToRender);
+						if (contentItemData.localName().toLowerCase() != REPLACE) {
+							renderChildComponent(contentItemDataToRender);
+						}
 					}
 				}
 			}	 
