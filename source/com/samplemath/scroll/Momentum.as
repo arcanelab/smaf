@@ -298,9 +298,12 @@ package com.samplemath.scroll {
 */
 		override public function stopScroll():void {
 			super.stopScroll();
-			if (root.hasEventListener(Event.ENTER_FRAME)) {
-				root.removeEventListener(Event.ENTER_FRAME, handleScroll);
-			}                  
+			if (root)
+			{
+				if (root.hasEventListener(Event.ENTER_FRAME)) {
+					root.removeEventListener(Event.ENTER_FRAME, handleScroll);
+				}                  
+			}
 			if (_mouseOriginIndicator) {
 				_mouseOriginIndicator.visible = false;
 			}
