@@ -206,29 +206,37 @@ package com.samplemath.composition {
 /**
 * 		@private
 */
+		public static function applyReplacePatterns(replacePatterns:XML, templateData:XML):XML {
+			if (replacePatterns.replace.length())
+			{                          
+				var templateNodeString:String = templateData.toXMLString();
+				for each(var pattern:XML in replacePatterns.replace.pattern)
+				{                                     
+					var value:String = pattern.text();
+					if (pattern.hasComplexContent())
+					{
+						value = pattern.children().toXMLString();
+					}
+					templateNodeString = templateNodeString.split(PATTERN_DELIMITER + pattern.@id.toString() + PATTERN_DELIMITER).join(value);
+				}           
+				templateData = new XML(templateNodeString);
+				while (replacePatterns.replace.length())
+				{
+					delete replacePatterns.replace[0];
+				}
+			}     
+			return templateData;
+		}
+
+/**
+* 		@private
+*/
 		public static function applyTemplate(contentItem:AComposable):void {
 			if (contentItem.itemData.@template.length()) {
 				if (Composition.getTemplate(contentItem.itemData.@template.toString()))
 				{
 					var templateNode:XML = Composition.getTemplate(contentItem.itemData.@template.toString());
-					if (contentItem.itemData.replace.length())
-					{                          
-						var templateNodeString:String = templateNode.toXMLString();
-						for each(var pattern:XML in contentItem.itemData.replace.pattern)
-						{                                     
-							var value:String = pattern.text();
-							if (pattern.hasComplexContent())
-							{
-								value = pattern.children().toXMLString();
-							}
-							templateNodeString = templateNodeString.split(PATTERN_DELIMITER + pattern.@id.toString() + PATTERN_DELIMITER).join(value);
-						}           
-						templateNode = new XML(templateNodeString);
-						while (contentItem.itemData.replace.length())
-						{
-							delete contentItem.itemData.replace[0];
-						}
-					}
+					templateNode = applyReplacePatterns(contentItem.itemData, templateNode);
 					delete templateNode.@template;
 					if (templateNode.hasComplexContent())
 					{

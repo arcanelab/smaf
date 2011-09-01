@@ -367,7 +367,8 @@ package com.samplemath.composition {
 *		@private
 */
 		public function handleContentDataLoaded(event:Event):void {
-			itemData = new XML(event.target.data);
+			var dataLoaded:XML = new XML(event.target.data);
+			itemData = Composition.applyReplacePatterns(itemData, dataLoaded);
 		}
 
 /**
@@ -420,7 +421,7 @@ package com.samplemath.composition {
 		private function loadContentData():void {             
 			if (_itemData.@url.toString()) {
 				_itemData.@urlLoaded = _itemData.@url.toString();
-				_itemData.@url = null; 
+				delete _itemData.@url[0]; 
 				var contentData:Data = new Data(_itemData.@urlLoaded.toString());									
 				contentData.loader.addEventListener(Event.COMPLETE, handleContentDataLoaded, false, 0, true);
 			}
