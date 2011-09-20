@@ -60,6 +60,14 @@ package com.samplemath.interaction {
 			buttonMode = false;
 			mouseEnabled = false;
 			useHandCursor = false;
+		}            
+		
+/**
+*		A boolean value representing whether the interactive element is disabled.
+*/
+		public function get disabled():Boolean
+		{
+			return _disabled;
 		}
 		
 /**

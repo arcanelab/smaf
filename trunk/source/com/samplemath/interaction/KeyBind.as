@@ -67,7 +67,7 @@ package com.samplemath.interaction {
 									itemID = registry[event.keyCode][counter];
 								}
 							}
-							if (!Registry.get(registry[event.keyCode][counter]).itemData.@keycode.length()) {
+							if ((!Registry.get(registry[event.keyCode][counter]).itemData.@keycode.length()) || Registry.get(registry[event.keyCode][counter]).disabled) {
 								itemID = EMPTY_STRING;
 							}
 						}
