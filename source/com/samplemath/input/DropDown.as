@@ -68,6 +68,10 @@ package com.samplemath.input {
 */
 		public function addItem(label:String, data:Object):void {
 			listBox.addItem(label, data);
+			if (!listBox.selection.length)
+			{
+				listBox.selection = [listBox.getItemAt(0)];
+			}
 		}
 
 /**
@@ -80,6 +84,10 @@ package com.samplemath.input {
 			if (listBox)
 			{
 				listBox.addItems(itemsToAdd);
+			}
+			if (!listBox.selection.length)
+			{
+				listBox.selection = [listBox.getItemAt(0)];
 			}
 		}        
 
@@ -175,12 +183,16 @@ package com.samplemath.input {
 			 	listBox.scrollToItem(listBox.selection[0].toString());
 			}
 			button.deselect();
+			dispatchEvent(new Event(Event.CHANGE, false));
 		}
 
 		private function handleDropDown(event:MouseEvent):void {
-			open = true; 
-			adjustDropDown();
-			button.select();
+			if (listBox.length  > 1)
+			{
+				open = true; 
+				adjustDropDown();
+				button.select();
+			}
 		}
 		
 /**
@@ -289,6 +301,16 @@ package com.samplemath.input {
 				renderDropDown();
 			}
 		}
+
+/**
+*		Removes all options from the dropdown.
+*/
+		public function removeItems():void { 
+			if (listBox)
+			{
+				listBox.removeItems();
+			}
+		}        
 
 /**
 *		@inheritDoc

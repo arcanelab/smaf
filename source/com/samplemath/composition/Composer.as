@@ -5,6 +5,7 @@ package com.samplemath.composition {
 	import com.samplemath.interaction.AInteractive;
 	import com.samplemath.interaction.ScrollReference;
 	import com.samplemath.load.Data;
+	import com.samplemath.load.ServiceProxy;
 	import com.samplemath.render.Filter;
 	import com.samplemath.shape.Box;
 
@@ -417,12 +418,22 @@ package com.samplemath.composition {
 			render();
 			Composition.applyProperties(AComposable(this));		
 		}
-		
+		        
 		private function loadContentData():void {             
 			if (_itemData.@url.toString()) {
+				var url:String = _itemData.@url.toString();     
+				var bypassBaseURL:Boolean = false;
+				if (_itemData.@bypassBaseURL.length())
+				{
+					if (Number(_itemData.@bypassBaseURL.toString()) || Boolean(_itemData.@bypassBaseURL.toString()))
+					{                                                         
+						bypassBaseURL = true;
+					}
+				}                             
+				
 				_itemData.@urlLoaded = _itemData.@url.toString();
 				delete _itemData.@url[0]; 
-				var contentData:Data = new Data(_itemData.@urlLoaded.toString());									
+				var contentData:Data = new Data(url, null, false, false, bypassBaseURL);									
 				contentData.loader.addEventListener(Event.COMPLETE, handleContentDataLoaded, false, 0, true);
 			}
 		}   
