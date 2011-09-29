@@ -5,9 +5,11 @@ package com.samplemath.load {
 	import com.samplemath.composition.Registry;
 	import com.samplemath.interaction.AInteractive;
 
-	import flash.display.Bitmap;
+	import flash.display.Bitmap;    
+	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
+	import flash.display.InteractiveObject;
 	import flash.display.Loader;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -20,6 +22,7 @@ package com.samplemath.load {
 	import flash.system.LoaderContext;
 	import flash.system.SecurityDomain;
 	import flash.utils.ByteArray;
+	import flash.utils.getDefinitionByName;
                   
 
 	                            
@@ -37,8 +40,8 @@ package com.samplemath.load {
 */
 	public class Asset extends AInteractive {
 	
-		private var assetLoaded:Loader;
-		private var assetLoader:Loader;
+		private var assetLoaded:DisplayObject;
+		private var assetLoader:DisplayObject;
 		private var assetLoading:Loader;
 		private var _itemHeight:Number = 0;
 		private var _itemWidth:Number = 0;
@@ -90,31 +93,36 @@ package com.samplemath.load {
 		}
 	
 		private function adjustScale():void {                      
-			if (assetLoader) {
-				if (assetLoader.content) {
+			if (assetLoader) {    
+				var thisContent:DisplayObject = assetLoader;
+				if (assetLoader is Loader)
+				{
+					thisContent = (assetLoader as Loader).content;
+				}
+				if (thisContent) {
 					var targetRectangle:Rectangle = new Rectangle(0, 0, _width, _height);
 					switch (_itemData.@scale.toString()) {
 						case Asset.CROP:
-							if (((assetLoader.content.width / assetLoader.content.height) * targetRectangle.height) < targetRectangle.width) {
-								assetLoader.height = int(assetLoader.content.height / (assetLoader.content.width / targetRectangle.width)); 
+							if (((thisContent.width / thisContent.height) * targetRectangle.height) < targetRectangle.width) {
+								assetLoader.height = int(thisContent.height / (thisContent.width / targetRectangle.width)); 
 								if (assetLoader.height) {
 									assetLoader.width = targetRectangle.width;
 								}
 							} else {
-								assetLoader.width = int(assetLoader.content.width / (assetLoader.content.height / targetRectangle.height));
+								assetLoader.width = int(thisContent.width / (thisContent.height / targetRectangle.height));
 								if (assetLoader.width) {
 									assetLoader.height = targetRectangle.height;
 								}
 							}
 							break;
 						case Asset.FIT:
-							if (((assetLoader.content.width / assetLoader.content.height) * targetRectangle.height) > targetRectangle.width) {
-								assetLoader.height = int(assetLoader.content.height / (assetLoader.content.width / targetRectangle.width)); 
+							if (((thisContent.width / thisContent.height) * targetRectangle.height) > targetRectangle.width) {
+								assetLoader.height = int(thisContent.height / (thisContent.width / targetRectangle.width)); 
 								if (assetLoader.height) {
 									assetLoader.width = targetRectangle.width;
 								}
 							} else {
-								assetLoader.width = int(assetLoader.content.width / (assetLoader.content.height / targetRectangle.height));
+								assetLoader.width = int(thisContent.width / (thisContent.height / targetRectangle.height));
 								if (assetLoader.width) {
 									assetLoader.height = targetRectangle.height;
 								}
@@ -143,7 +151,10 @@ package com.samplemath.load {
 			var response:DisplayObject = null;
 			if (assetLoader) {
 				if (assetLoader.hasOwnProperty(CONTENT)) {
-					response = assetLoader.content;
+					if (assetLoader is Loader)
+					{
+						response = (assetLoader as Loader).content;
+					}
 				}				
 			}
 			return response;
@@ -178,6 +189,9 @@ package com.samplemath.load {
 		}
 
 		private function handleAssetLoaded(event:Event):void {
+			if (_itemData.@classname.length()) {
+				ExternalInterface.call("alert", "handleAssetLoaded " + event.target.toString());
+			}
 			assetLoaded = event.target.loader as Loader;
 			
 			if (assetLoaded) {
@@ -193,13 +207,13 @@ package com.samplemath.load {
 						}
 						if (checkPolicyFile == false)
 						{
-							if (assetLoaded.content is Bitmap) {
-								Bitmap(assetLoaded.content).smoothing = true;
+							if ((assetLoaded as Loader).content is Bitmap) {
+								Bitmap((assetLoaded as Loader).content).smoothing = true;
 							}
-							if (assetLoaded.content is DisplayObjectContainer) {
-								if (DisplayObjectContainer(assetLoaded.content).numChildren) {
-									if (DisplayObjectContainer(assetLoaded.content).getChildAt(0) is Bitmap) {
-										Bitmap(DisplayObjectContainer(assetLoaded.content).getChildAt(0)).smoothing = true;
+							if ((assetLoaded as Loader).content is DisplayObjectContainer) {
+								if (DisplayObjectContainer((assetLoaded as Loader).content).numChildren) {
+									if (DisplayObjectContainer((assetLoaded as Loader).content).getChildAt(0) is Bitmap) {
+										Bitmap(DisplayObjectContainer((assetLoaded as Loader).content).getChildAt(0)).smoothing = true;
 									}
 								}
 							}
@@ -209,9 +223,9 @@ package com.samplemath.load {
 
 				if (!loadFromCache) {
 					var permanent:Boolean = _itemData.@cachepermanent.length() ? (Number(_itemData.@cachepermanent.toString()) || (_itemData.@cachepermanent.toString() == TRUE)) : false;
-					if (assetLoaded) {
-						if (assetLoaded.contentLoaderInfo) {
-							AssetCache.cache(assetLoaded.contentLoaderInfo.url as String, assetLoaded.contentLoaderInfo.bytes as ByteArray, permanent);
+					if ((assetLoaded as Loader)) {
+						if ((assetLoaded as Loader).contentLoaderInfo) {
+							AssetCache.cache((assetLoaded as Loader).contentLoaderInfo.url as String, (assetLoaded as Loader).contentLoaderInfo.bytes as ByteArray, permanent);
 						}
 					}
 				}
@@ -224,6 +238,8 @@ package com.samplemath.load {
 		}
 
 		private function handleAssetLoadError(event:IOErrorEvent):void {
+			ExternalInterface.call("alert", "handleAssetLoadError " + event.text);
+			
 		}
 
 		private function handleAssetLoading(event:ProgressEvent):void {
@@ -330,7 +346,54 @@ package com.samplemath.load {
 				} else {
 					loadFromCache = false;
 					assetLoading.load(new URLRequest(url), loaderContext);
-				}			} else {
+				}
+			} else {
+				dispatchEvent(new Event(Event.COMPLETE));
+				if (!_waitToSwitch) {
+					switchAssets();
+				}
+			}
+		}
+
+/**
+*		Loads an image asset from the specified URL. Only use this if you need to have
+*		control over the ApplicationDomain to load the asset in. Otherwise use the <code>url</code> property/attribute.
+*
+*		@param url The URL of the file to load
+*		@param loadInDomain An optional <code>ApplicationDomain</code> to load the file in. This may be useful when loading code modules from SMXML.
+*/
+import flash.external.ExternalInterface;
+		public function loadAssetFromClass(className:String, loadInDomain:ApplicationDomain = null):void {
+			if (className != "") {         
+				if (assetLoading) {
+					try {
+						assetLoading.close();
+					} catch (error:Error) {}
+					if (assetLoading.contentLoaderInfo) {
+						if (assetLoading.contentLoaderInfo.hasEventListener(Event.INIT)) {
+							assetLoading.contentLoaderInfo.removeEventListener(Event.INIT, handleAssetLoaded);
+						}
+						if (assetLoading.contentLoaderInfo.hasEventListener(IOErrorEvent.IO_ERROR)) {
+							assetLoading.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, handleAssetLoadError);
+						}
+						if (assetLoading.contentLoaderInfo.hasEventListener(ProgressEvent.PROGRESS)) {
+							assetLoading.contentLoaderInfo.removeEventListener(ProgressEvent.PROGRESS, handleAssetLoading);
+						}
+					}
+					assetLoading = null;
+				}
+				var imageFromClass:Class = undefined;
+				try {
+					imageFromClass = Class(getDefinitionByName(className));
+				} catch (e:Error) {
+				}                          
+				if (imageFromClass)
+				{
+					var bitmapFromClass:Bitmap = new imageFromClass() as Bitmap;
+					assetLoaded = bitmapFromClass;
+					switchAssets();
+				}
+			} else {
 				dispatchEvent(new Event(Event.COMPLETE));
 				if (!_waitToSwitch) {
 					switchAssets();
@@ -342,7 +405,7 @@ package com.samplemath.load {
 *		The <code>Loader</code> instance wrapped inside.
 */
 		public function get loader():Loader {
-			return assetLoader ? assetLoader : null;
+			return assetLoader ? assetLoader as Loader : null;
 		}
 		
 /**
@@ -351,8 +414,12 @@ package com.samplemath.load {
 		override protected function render():void {
 			super.render();
 			var loadInDomain:ApplicationDomain = _itemData.@loadInCurrentDomain.length() ? ApplicationDomain.currentDomain : null;
-			if (_itemData.@url.length()) {
-				loadAsset(_itemData.@url, loadInDomain);
+			if (_itemData.@classname.length()) {
+				loadAssetFromClass(_itemData.@classname.toString(), loadInDomain);
+			} else {
+				if (_itemData.@url.length()) {
+					loadAsset(_itemData.@url.toString(), loadInDomain);
+				}
 			}
 		}
 		
@@ -421,11 +488,14 @@ package com.samplemath.load {
 			} else {
 				assetLoader = new Loader();
 				assetLoader.cacheAsBitmap = cacheAsBitmap;
-				assetLoader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, handleAssetLoadError, false, 0, true);
+				(assetLoader as Loader).contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, handleAssetLoadError, false, 0, true);
 			}
 			addChild(assetLoader);	   
-			 	
-			assetLoader.mouseEnabled = mouseEnabled;
+			 	                   
+			if (assetLoader is InteractiveObject)
+			{
+				(assetLoader as InteractiveObject).mouseEnabled = mouseEnabled;
+			}
 
 			adjustAsset();
 
