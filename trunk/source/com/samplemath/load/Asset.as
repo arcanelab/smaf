@@ -189,9 +189,6 @@ package com.samplemath.load {
 		}
 
 		private function handleAssetLoaded(event:Event):void {
-			if (_itemData.@classname.length()) {
-				ExternalInterface.call("alert", "handleAssetLoaded " + event.target.toString());
-			}
 			assetLoaded = event.target.loader as Loader;
 			
 			if (assetLoaded) {
@@ -238,8 +235,6 @@ package com.samplemath.load {
 		}
 
 		private function handleAssetLoadError(event:IOErrorEvent):void {
-			ExternalInterface.call("alert", "handleAssetLoadError " + event.text);
-			
 		}
 
 		private function handleAssetLoading(event:ProgressEvent):void {
@@ -362,7 +357,6 @@ package com.samplemath.load {
 *		@param url The URL of the file to load
 *		@param loadInDomain An optional <code>ApplicationDomain</code> to load the file in. This may be useful when loading code modules from SMXML.
 */
-import flash.external.ExternalInterface;
 		public function loadAssetFromClass(className:String, loadInDomain:ApplicationDomain = null):void {
 			if (className != "") {         
 				if (assetLoading) {
