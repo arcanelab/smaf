@@ -11,6 +11,7 @@ package com.samplemath.load {
 	import flash.display.DisplayObjectContainer;
 	import flash.display.InteractiveObject;
 	import flash.display.Loader;
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
@@ -356,7 +357,7 @@ package com.samplemath.load {
 *
 *		@param url The URL of the file to load
 *		@param loadInDomain An optional <code>ApplicationDomain</code> to load the file in. This may be useful when loading code modules from SMXML.
-*/
+*/                                   
 		public function loadAssetFromClass(className:String, loadInDomain:ApplicationDomain = null):void {
 			if (className != "") {         
 				if (assetLoading) {
@@ -381,12 +382,21 @@ package com.samplemath.load {
 					imageFromClass = Class(getDefinitionByName(className));
 				} catch (e:Error) {
 				}                          
-				if (imageFromClass)
+				try {
+					var bitmapFromClass:Object = new imageFromClass();
+				} catch (e:Error) {
+				}                          
+				if (bitmapFromClass is BitmapData)
 				{
-					var bitmapFromClass:Bitmap = new imageFromClass() as Bitmap;
-					assetLoaded = bitmapFromClass;
-					switchAssets();
+					var bitmapFromData:Bitmap = new Bitmap(bitmapFromClass as BitmapData);
+					assetLoaded = bitmapFromData;
+				} else {
+					if (bitmapFromClass is DisplayObject)
+					{
+						assetLoaded = bitmapFromClass as DisplayObject;
+					}
 				}
+				switchAssets();
 			} else {
 				dispatchEvent(new Event(Event.COMPLETE));
 				if (!_waitToSwitch) {
