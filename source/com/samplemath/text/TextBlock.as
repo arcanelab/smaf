@@ -32,7 +32,7 @@ package com.samplemath.text {
 	public class TextBlock extends AComposable {
 		
 	                      
-		private var _color:Number;
+		private var _color:Number;    
 		private var _itemHeight:int = 100;
 		private var _itemWidth:int = 102;
 		private var _selectedColor:Number;
@@ -47,7 +47,8 @@ package com.samplemath.text {
 		private const CDATA_PREFIX:String = "<![CDATA[";
 		private const CDATA_SUFFIX:String = "]]>";
 		private const EMPTY_STRING:String = "";
-		private const LINE_BREAK:String = "\n";
+		private const LINE_BREAK:String = "\n";      
+		private const TRUE:String = "true";
 		
 		
 		
@@ -147,8 +148,11 @@ package com.samplemath.text {
 					_textField.height = _itemHeight;
 					scaleX = scaleY = 1;
 				}
-				_textField.setTextFormat(_textFormat);
-				textFieldColor = new TextFieldColor(_textField, _color, _selectionColor, _selectedColor);
+				if (!htmlFormatted)
+				{
+					_textField.setTextFormat(_textFormat);
+					textFieldColor = new TextFieldColor(_textField, _color, _selectionColor, _selectedColor);
+				}
 			}                                         
 		}    
 		
@@ -176,6 +180,19 @@ package com.samplemath.text {
 			adjustTextField();
 		}
 
+
+/**
+*		[SMXML] The textformat style used for the <code>TextBlock</code>.
+*/
+		public function get htmlFormatted():Boolean {
+			var value:Boolean = false;
+			if (_itemData) {
+				if (_itemData.@htmlformatted.length()) {
+					value = (_itemData.@htmlformatted.toString() == TRUE) || Number(_itemData.@htmlformatted.toString());
+				}
+			}
+			return value;
+		}
 
 /**
 *		Use this property to set the TextField's <code>htmlText</code> property instead of <code>text</code>.
