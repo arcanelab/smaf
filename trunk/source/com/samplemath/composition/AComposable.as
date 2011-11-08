@@ -22,6 +22,7 @@ package com.samplemath.composition {
 		*/
 		protected var _itemData:XML;
 		
+		private static const ZERO:int = 0;
 		
 		
 			
@@ -173,7 +174,10 @@ package com.samplemath.composition {
 			var value:Number = super.height;
 			if (_itemData) {
 				if (_itemData.@height.length()) {
-					value = Number(_itemData.@height.toString());
+					if (Number(_itemData.@height.toString()) || (Number(_itemData.@height.toString()) == ZERO))
+					{
+						value = Number(_itemData.@height.toString());
+					}
 				}
 			}
 			return value;
@@ -518,8 +522,11 @@ package com.samplemath.composition {
 		override public function get width():Number {
 			var value:Number = super.width; 
 			if (_itemData) {
-				if (_itemData.@width.length()) {
-					value = Number(_itemData.@width.toString());
+				if (_itemData.@width.length()) {               
+					if (Number(_itemData.@width.toString()) || (Number(_itemData.@width.toString()) == ZERO))
+					{
+						value = Number(_itemData.@width.toString());
+					}
 				}
 			}
 			return value;
