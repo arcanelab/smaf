@@ -287,7 +287,7 @@ package com.samplemath.composition {
 /**
 *		@private
 */
-		protected function get content():Sprite {
+		public function get content():Sprite {
 			return _content;
 		}
 		
