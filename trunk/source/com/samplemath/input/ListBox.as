@@ -107,14 +107,15 @@ package com.samplemath.input {
 			position = Math.min(position, _itemsIndex.length);
 			position = Math.max(position, 0);
 			var labelCount:int = 1;
-			var originalLabel:String = label;
-			while(_items[label]) {
+			var labelEncoded:String = escape(label);
+			var originalLabel:String = labelEncoded;
+			while(_items[labelEncoded]) {
 				labelCount++; 
-				label = originalLabel + labelCount.toString();
+				labelEncoded = originalLabel + labelCount.toString();
 			}
-			_items[label] = data;
-			_itemLabels[data] = label;
-			_itemsIndex = _itemsIndex.splice(0, position).concat([_items[label]].concat(_itemsIndex.splice(position, _itemsIndex.length - position)));      
+			_items[labelEncoded] = data;
+			_itemLabels[data] = labelEncoded;
+			_itemsIndex = _itemsIndex.splice(0, position).concat([_items[labelEncoded]].concat(_itemsIndex.splice(position, _itemsIndex.length - position)));      
 		}         
 		
 
@@ -451,7 +452,7 @@ package com.samplemath.input {
 			if (_itemData.@itemskin.length()) {
 				var itemRenderedUp:XML = <composer/>;
 				itemRenderedUp.@template = _itemData.@itemskin.toString();
-				Composition.addPattern(itemRenderedUp, LABEL, label);
+				Composition.addPattern(itemRenderedUp, LABEL, unescape(label));
 				Composition.addPattern(itemRenderedUp, ID, thisItemID + ITEM  + UP);
 				itemRendered.appendChild(itemRenderedUp);
 			}                         
@@ -459,7 +460,7 @@ package com.samplemath.input {
 				var itemRenderedOver:XML = <composer/>;
 				itemRenderedOver.@template = _itemData.@itemskinover.toString();
 				itemRenderedOver.@visible = 0;
-				Composition.addPattern(itemRenderedOver, LABEL, label);
+				Composition.addPattern(itemRenderedOver, LABEL, unescape(label));
 				Composition.addPattern(itemRenderedOver, ID, thisItemID + ITEM  + OVER);
 				itemRendered.appendChild(itemRenderedOver);
 			}                         
@@ -468,7 +469,7 @@ package com.samplemath.input {
 				var itemRenderedSelected:XML = <composer/>;
 				itemRenderedSelected.@template = _itemData.@itemskinselected.toString();
 				itemRenderedSelected.@visible = 0;
-				Composition.addPattern(itemRenderedSelected, LABEL, label);
+				Composition.addPattern(itemRenderedSelected, LABEL, unescape(label));
 				Composition.addPattern(itemRenderedSelected, ID, thisItemID + ITEM  + SELECTED);
 				itemRendered.appendChild(itemRenderedSelected);
 			}                         
