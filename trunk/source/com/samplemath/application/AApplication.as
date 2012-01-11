@@ -150,7 +150,6 @@ package com.samplemath.application {
 			
 			Registry.set(this, APPLICATION);
 
-			stage.addEventListener(Event.RESIZE, handleStageResize, false, 0, true);
 			AssetCache.stage = stage;
 			FontManager.stage = stage;
 			KeyBind.stage = stage;
@@ -158,8 +157,11 @@ package com.samplemath.application {
 			stage.addEventListener(Event.RESIZE, handleStageResize, false, 0, true);
 			stage.stageFocusRect = false;
 			Registry.set(stage, STAGE);
-
-			Security.allowDomain(ALL);
+                     
+			if (Security.sandboxType == Security.REMOTE)
+			{
+				Security.allowDomain(ALL);
+			}
 		}
  
 /**

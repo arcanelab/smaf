@@ -275,6 +275,13 @@ package com.samplemath.input {
 		}
 
 /**
+*		Force toggles the state of the <code>Toggle</code>.
+*/
+		public function toggle():void {  
+			handleToggle(null);
+		}
+
+/**
 *		The <code>Toggle</code>'s label.
 */
 		public function get value():Boolean {
