@@ -180,9 +180,33 @@ package com.samplemath.composition {
 							_content.width = targetRectangle.width;
 							_content.height = targetRectangle.height;
 							break;
+					}                                  
+					var contentX:int = int((targetRectangle.width - _content.width) / 2);
+					var contentY:int = int((targetRectangle.height - _content.height) / 2);
+					if (_itemData.@scalehalign.length())
+					{                                    
+						if (_itemData.@scalehalign.toString() == Box.LEFT)
+						{
+							contentX = 0;
+						}
+						if (_itemData.@scalehalign.toString() == Box.RIGHT)
+						{
+							contentX = int(targetRectangle.width - _content.width);
+						}
 					}
-					_content.x = int((targetRectangle.width - _content.width) / 2);
-					_content.y = int((targetRectangle.height - _content.height) / 2);
+					if (_itemData.@scalevalign.length())
+					{                                    
+						if (_itemData.@scalevalign.toString() == Box.TOP)
+						{
+							contentY = 0;
+						}
+						if (_itemData.@scalevalign.toString() == Box.BOTTOM)
+						{
+							contentY = int(targetRectangle.height - _content.height);
+						}
+					}
+					_content.x = contentX;
+					_content.y = contentY;
 					_content.scrollRect = null;
 				}
 			}
