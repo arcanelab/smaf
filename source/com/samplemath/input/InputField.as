@@ -423,7 +423,30 @@ package com.samplemath.input {
 			{
 				stage.focus = inputText.textField;
 			}
-		}
+		}   
+		
+/**
+*		Sets the inputfield invalid.
+*/
+		public function setInvalid():void
+		{
+			if (stage)
+			{   
+				if (!stage.focus)
+				{
+					stage.focus = inputText.textField;
+				}
+			}
+			if (fieldBackground) {
+				if (_itemData.@fillinvalid.length()) {
+					fieldBackground.itemData.@fill = _itemData.@fillinvalid.toString();
+				}
+				if (_itemData.@strokeinvalid.length()) {
+					fieldBackground.itemData.@stroke = _itemData.@strokeinvalid.toString();
+				}
+				fieldBackground.adjustBox();
+			}
+		}   
 
 /**
 *		[SMXML] The stroke style for the default state of the input field.
