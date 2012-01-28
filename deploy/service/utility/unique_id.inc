@@ -1,7 +1,7 @@
 <? 
-	function generate256BitUniqueID() {
-		for ($i = 0; $i < 64; $i++)
-	       $id .= substr('0123456789abcdefghijklmnopqrstuv', rand(0,31), 1);
+	function generateUniqueID() {
+		for ($i = 0; $i < 8; $i++)
+	       $id .= substr('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', rand(0,62), 1);
 			return $id;
 	}
 ?>
