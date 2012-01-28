@@ -11,9 +11,6 @@ package com.samplemath.application {
 	import com.samplemath.user.User;
 	import com.samplemath.utility.Utility;
 
-	import com.samplemath.thirdparty.asual.swfaddress.SWFAddress;
-	import com.samplemath.thirdparty.asual.swfaddress.SWFAddressEvent;
-
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
