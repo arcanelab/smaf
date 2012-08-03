@@ -355,9 +355,6 @@ package com.samplemath.composition {
 				var nextComponent:AComposable = components.pop();
 				nextComponent.destroy();
 			}    
-			while (_itemData.children().length()) {
-				delete _itemData.children()[0];
-			}   
 		}        
 		
 /**
